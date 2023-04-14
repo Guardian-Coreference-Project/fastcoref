@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import spacy
 import wandb
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from torch.optim.adamw import AdamW
 from tqdm.auto import tqdm
@@ -61,9 +61,9 @@ class TrainingArgs:
     max_tokens_in_batch: int = 5000
     device: str = None
     freeze_transformer_layers: bool = True
-    freeze_custom_layers: list[
-        str
-    ] = []  # Add strings (or substrings) of model layers to
+    freeze_custom_layers: list[str] = field(
+        default_factory=list
+    )  # Add strings (or substrings) of model layers to
     # freeze (inspect these using model.named_parameters())
 
 
