@@ -197,23 +197,28 @@ class CorefTrainer:
             for n, p in self.model.named_parameters()
             if not any(hp in n for hp in head_params)
             and not any(nd in n for nd in no_decay)
+            and (p.requires_grad)
         ]
         model_no_decay = [
             p
             for n, p in self.model.named_parameters()
             if not any(hp in n for hp in head_params)
             and any(nd in n for nd in no_decay)
+            and (p.requires_grad)
         ]
         head_decay = [
             p
             for n, p in self.model.named_parameters()
             if any(hp in n for hp in head_params)
             and not any(nd in n for nd in no_decay)
+            and (p.requires_grad)
         ]
         head_no_decay = [
             p
             for n, p in self.model.named_parameters()
-            if any(hp in n for hp in head_params) and any(nd in n for nd in no_decay)
+            if any(hp in n for hp in head_params)
+            and any(nd in n for nd in no_decay)
+            and (p.requires_grad)
         ]
 
         head_learning_rate = (
