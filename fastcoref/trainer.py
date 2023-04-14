@@ -60,8 +60,11 @@ class TrainingArgs:
     max_doc_len: int = None
     max_tokens_in_batch: int = 5000
     device: str = None
-    freeze_transformer_layers: bool = False
-    freeze_custom_layers: list[str] = []
+    freeze_transformer_layers: bool = True
+    freeze_custom_layers: list[
+        str
+    ] = []  # Add strings (or substrings) of model layers to
+    # freeze (inspect these using model.named_parameters())
 
 
 def _load_f_coref_model(args):
